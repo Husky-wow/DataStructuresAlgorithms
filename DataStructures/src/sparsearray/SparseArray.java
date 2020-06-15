@@ -1,5 +1,6 @@
 package sparsearray;
 
+
 public class SparseArray {
     private static int originalArrayWidth = 11;
 
