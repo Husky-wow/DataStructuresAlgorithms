@@ -18,9 +18,13 @@ public class SinglyLinkedListDemo {
         /*
         添加节点
          */
-        singlyLinkedList.add(hero1);
+        /*singlyLinkedList.add(hero1);
         singlyLinkedList.add(hero6);
-        singlyLinkedList.add(hero2);
+        singlyLinkedList.add(hero2);*/
+
+        singlyLinkedList.addByOrder(hero1);
+        singlyLinkedList.addByOrder(hero6);
+        singlyLinkedList.addByOrder(hero2);
 
         singlyLinkedList.list();
     }

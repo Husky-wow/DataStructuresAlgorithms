@@ -32,6 +32,38 @@ public class SinglyLinkedList {
     }
 
     /**
+     * 按顺序添加
+     * 找到节点添加的未知(temp和temp.next的中间)
+     * 一个节点的no > node.no，则node添加到该节点之前
+     *
+     * @param node 需要添加的节点
+     */
+    public void addByOrder(HeroNode node) {
+        // 从头节点开始遍历
+        HeroNode temp = headNode;
+        /*
+        如果node.no = 0,，即node.no = headNode.no，无法添加
+        */
+        if (node.no == 0) {
+            System.out.println("节点 no 不能等于0，无法添加");
+            return;
+        }
+
+        while (temp.next != null) {
+            if (temp.next.no > node.no) {
+                break;
+            } else if (temp.next.no == node.no) {
+                System.out.println("该节点已经存在，无法添加");
+                break;
+            }
+            temp = temp.next;
+        }
+
+        node.next = temp.next;
+        temp.next = node;
+    }
+
+    /**
      * 遍历链表，从节点指向的节点开始输出
      */
     public void list() {
