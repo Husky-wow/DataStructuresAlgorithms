@@ -27,5 +27,11 @@ public class SinglyLinkedListDemo {
         singlyLinkedList.addByOrder(hero2);
 
         singlyLinkedList.list();
+
+        HeroNode heroUpdate = new HeroNode(2, "大卢", "玉麒麟~~");
+        singlyLinkedList.update(heroUpdate);
+
+        System.out.println("链表节点更新后~~~");
+        singlyLinkedList.list();
     }
 }

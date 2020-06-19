@@ -64,6 +64,26 @@ public class SinglyLinkedList {
     }
 
     /**
+     * 找到链表中 no为 node.no的节点，并将该节点更新
+     * @param node
+     */
+    public void update(HeroNode node) {
+        HeroNode temp = headNode;
+
+        while (temp.next != null) {
+            // temp后移
+            temp = temp.next;
+            if (temp.no == node.no) {
+                temp.name = node.name;
+                temp.nickName = node.nickName;
+                return;
+            }
+        }
+        // temp.next == null时执行
+        System.out.println("在当前链表中没有找到该节点，无法更新");
+    }
+
+    /**
      * 遍历链表，从节点指向的节点开始输出
      */
     public void list() {
