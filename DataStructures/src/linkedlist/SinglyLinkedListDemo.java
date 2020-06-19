@@ -33,5 +33,9 @@ public class SinglyLinkedListDemo {
 
         System.out.println("链表节点更新后~~~");
         singlyLinkedList.list();
+
+        singlyLinkedList.delete(2);
+        System.out.println("删除2节点后~~");
+        singlyLinkedList.list();
     }
 }

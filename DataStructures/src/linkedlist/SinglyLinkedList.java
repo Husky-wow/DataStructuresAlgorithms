@@ -84,6 +84,27 @@ public class SinglyLinkedList {
     }
 
     /**
+     * 删除no节点
+     * temp为待删除节点的前一个节点
+     * temp.next = temp.next.next
+     * @param no
+     */
+    public void delete(int no) {
+        // 从头节点开始遍历
+        HeroNode temp = headNode;
+
+        while (temp.next != null) {
+            if (temp.next.no == no) {
+                temp.next = temp.next.next;
+                return;
+            }
+            temp = temp.next;
+        }
+
+        System.out.println("没有找到可删除的节点");
+    }
+
+    /**
      * 遍历链表，从节点指向的节点开始输出
      */
     public void list() {
