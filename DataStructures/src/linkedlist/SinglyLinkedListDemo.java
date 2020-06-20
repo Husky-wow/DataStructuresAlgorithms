@@ -26,16 +26,26 @@ public class SinglyLinkedListDemo {
         singlyLinkedList.addByOrder(hero6);
         singlyLinkedList.addByOrder(hero2);
 
-        singlyLinkedList.list();
-
         HeroNode heroUpdate = new HeroNode(2, "大卢", "玉麒麟~~");
+
         singlyLinkedList.update(heroUpdate);
 
-        System.out.println("链表节点更新后~~~");
+        singlyLinkedList.list();
+
+        /*System.out.println("链表节点更新后~~~");
         singlyLinkedList.list();
 
         singlyLinkedList.delete(2);
         System.out.println("删除2节点后~~");
-        singlyLinkedList.list();
+        singlyLinkedList.list();*/
+
+        int count = singlyLinkedList.size();
+        System.out.println(count);
+
+
+        // 求倒数第三个元素，k = 3
+        HeroNode lastNode = singlyLinkedList.getLastIndex(1);
+        System.out.println(lastNode.toString());
+
     }
 }

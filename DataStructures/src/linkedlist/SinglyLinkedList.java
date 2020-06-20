@@ -122,4 +122,44 @@ public class SinglyLinkedList {
         }
     }
 
+    /**
+     * 求链表中节点个数，不算头节点
+     * @return
+     */
+    public int size() {
+        int count = 0;
+        // 从头节点开始遍历
+        HeroNode current = headNode;
+        while (current.next != null) {
+            count++;
+            current = current.next;
+        }
+
+        return count;
+    }
+
+    /**
+     * 求链表倒数第k个元素
+     *         1. 求出链表元素个数
+     *         2. 求出倒数第k个元素的整数位置，以目前的思路，应该是 size() - k + 1;
+     *         3. 从头遍历找到该元素
+     * @param lastIndex 倒数第几个元素
+     * @return
+     */
+    public HeroNode getLastIndex(int lastIndex) {
+        int count = this.size();
+        int index = count - lastIndex + 1;
+        if (index <= 0) {
+            System.out.println("该元素不存在");
+            return null;
+        }
+        // 当前
+        HeroNode current = headNode;
+        for (int i = 1; i <= index; i++) {
+            current = current.next;
+        }
+
+        return current;
+    }
+
 }
