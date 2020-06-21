@@ -3,7 +3,7 @@ package linkedlist;
 import java.net.HttpRetryException;
 
 /**
- * @author admin
+ * @author xuxd
  * @ClassName SinglyLinkedList.java
  * @Description 单向链表，每一个节点为一个SingleHeroNode，存在一个无数据的头节点
  * @createTime 2020年06月18日 23:18:00
