@@ -32,6 +32,11 @@ public class SinglyLinkedListDemo {
 
         singlyLinkedList.list();
 
+        // 反转链表
+        singlyLinkedList.reverseList();
+        System.out.println("链表反转后~~~~");
+        singlyLinkedList.list();
+
         /*System.out.println("链表节点更新后~~~");
         singlyLinkedList.list();
 

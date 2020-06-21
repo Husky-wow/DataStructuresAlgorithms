@@ -1,5 +1,7 @@
 package linkedlist;
 
+import java.net.HttpRetryException;
+
 /**
  * @author admin
  * @ClassName SinglyLinkedList.java
@@ -160,6 +162,38 @@ public class SinglyLinkedList {
         }
 
         return current;
+    }
+
+    /**
+     * 反转链表中的元素
+     * 1. 新建一个头节点 reverseHead
+     * 2. 从头遍历链表，将每一个遍历到的节点放置在reverseHead的后边（头插入法）
+     * 3. head.next = reverseHead.next
+     */
+    public void reverseList() {
+        // 如果链表仅有头结点，或者只有一个节点，无需反转，直接返回
+        if (headNode.next == null || headNode.next.next == null) {
+            return;
+        }
+        // 当前正在遍历的节点
+        HeroNode current = headNode.next;
+        // 记录当前节点的下一个节点，否在在后边的过程中会丢失节点，链表断裂
+        HeroNode next;
+        // 新的头节点
+        HeroNode revereHead = new HeroNode(0, "", "");
+
+        /*
+        遍历节点并移动
+         */
+        while (current != null) {
+            // 先对next赋值，如果最后对next赋值，会多循环一次，并报空指针错误
+            next = current.next;
+            current.next = revereHead.next;
+            revereHead.next = current;
+            current = next;
+        }
+
+        headNode.next = revereHead.next;
     }
 
 }
