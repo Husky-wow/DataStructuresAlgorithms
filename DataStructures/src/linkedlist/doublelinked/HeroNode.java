@@ -1,10 +1,10 @@
-package linkedlist;
+package linkedlist.doublelinked;
 
 /**
  * @author admin
  * @ClassName HeroNode.java
- * @Description 链表节点类（以水浒传英雄为元素）
- * @createTime 2020年06月18日 23:01:00
+ * @Description 双向链表节点类
+ * @createTime 2020年06月23日 21:43:00
  */
 public class HeroNode {
     /**
@@ -20,9 +20,14 @@ public class HeroNode {
     public String nickName;
 
     /**
-     * 指向下一节点
+     * 下一节点
      */
     public HeroNode next;
+
+    /**
+     * 前一节点
+     */
+    public HeroNode pre;
 
     public HeroNode(int no, String name, String nickName) {
         this.no = no;
