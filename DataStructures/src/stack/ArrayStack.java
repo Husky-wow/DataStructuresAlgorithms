@@ -58,6 +58,31 @@ public class ArrayStack {
     }
 
     /**
+     * 入栈操作符，为了Calculator
+     * @param value
+     * @return 返回入栈结果
+     *  当前操作符的优先级 <= 栈顶的操作符 时返回false
+     *  当前操作符的优先级 > 栈顶的操作符 时返回true
+     */
+    public boolean pushOperator(int value) {
+        // 如果栈为空直接入栈
+        if (isEmpty()) {
+            push(value);
+
+            return true;
+        }
+        int priority  = getPriority(value);
+        if (priority == -1) {
+            throw new RuntimeException("操作符错误，传入操作符为：" + (char) value);
+        }
+        if (priority <= getPriority(peek())) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
      * 出栈
      * @return
      */
@@ -67,6 +92,14 @@ public class ArrayStack {
         }
 
         return stack[top--];
+    }
+
+    /**
+     * 查看栈顶的值
+     * @return
+     */
+    public int peek() {
+        return stack[top];
     }
 
     /**
@@ -80,6 +113,30 @@ public class ArrayStack {
         for (int i = top; i >= 0; i--) {
             System.out.printf("stack[%d] = %d \n", i, stack[i]);
         }
+    }
+
+    /**
+     * 转换操作符的优先级
+     * @param value
+     * @return
+     */
+    private int getPriority(int value) {
+        char operator = (char) value;
+        int priority = -1;
+        switch (operator) {
+            case '+':
+            case '-':
+                priority = 1;
+               break;
+            case '*':
+            case '/':
+                priority = 2;
+                break;
+            default:
+                break;
+        }
+
+        return priority;
     }
 
 
