@@ -8,7 +8,7 @@ package stack;
  */
 public class CalculatorDemo {
     public static void main(String[] args) {
-        String str = "176-100*2+1";
+        String str = "4/2*2";
         Calculator calculator = new Calculator();
 
         try {

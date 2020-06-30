@@ -92,8 +92,8 @@ public class Calculator {
             int num2 = numStack.pop();
             char operaChar = (char) operaStack.pop();
             int result = cal(num1, num2, operaChar);
-            numStack.push(result);
-            operaStack.push(operator);
+            // 这里将计算结果和operator入栈时还要继续判断，因此要递归调用
+            pop(result, operator);
         }
     }
 

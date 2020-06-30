@@ -78,6 +78,7 @@ public class ArrayStack {
         if (priority <= getPriority(peek())) {
             return false;
         } else {
+            push(value);
             return true;
         }
     }
@@ -125,12 +126,16 @@ public class ArrayStack {
         int priority = -1;
         switch (operator) {
             case '+':
-            case '-':
                 priority = 1;
-               break;
-            case '*':
-            case '/':
+                break;
+            case '-':
                 priority = 2;
+                break;
+            case '*':
+                priority = 3;
+                break;
+            case '/':
+                priority = 4;
                 break;
             default:
                 break;
