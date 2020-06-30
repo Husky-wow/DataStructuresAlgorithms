@@ -8,18 +8,19 @@ package stack;
  */
 public class CalculatorDemo {
     public static void main(String[] args) {
-        String str = "136+6+300";
+        String str = "176-100*2+1";
         Calculator calculator = new Calculator();
 
         try {
-            calculator.calculation(str);
+            int result = calculator.calculation(str);
+            System.out.println("result = " + result);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
-        System.out.println("NumStack~~~");
+        /*System.out.println("NumStack~~~");
         calculator.getNumStack().list();
         System.out.println("OperaStack~~~");
-        calculator.getOperaStack().list();
+        calculator.getOperaStack().list();*/
     }
 }

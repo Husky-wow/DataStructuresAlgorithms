@@ -70,11 +70,20 @@ public class Calculator {
             numStack.push(num);
         }
 
-        return 0;
+        /*
+        执行到这里，字符串已经被转换完成
+        将两个栈中的数据依次弹出做计算
+         */
+        return cal();
     }
 
 
-    //数字和操作符入栈
+    /**
+     * 将数字和操作符入栈
+     *  包含对操作符的优先级判断
+     * @param num
+     * @param operator
+     */
     private void pop(int num, int operator) {
         numStack.push(num);
         // 如果操作符入栈失败，即当前操作符的优先级 <= 栈顶的操作符
@@ -116,5 +125,25 @@ public class Calculator {
 
         return result;
     }
+
+    /**
+     * 将两个栈中的数据依次弹出计算
+     * 当operaStack为空时，计算完毕
+     * 将numStack中最后一个数返回即为结果
+     * @return
+     */
+    private int cal() {
+        int result = 0;
+        while (!operaStack.isEmpty()) {
+            int num1 = numStack.pop();
+            int num2 = numStack.pop();
+            char operaChar = (char) operaStack.pop();
+            result = cal(num1, num2, operaChar);
+            numStack.push(result);
+        }
+
+        return numStack.pop();
+    }
+
 
 }
