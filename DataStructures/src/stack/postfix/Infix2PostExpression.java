@@ -41,25 +41,32 @@ public class Infix2PostExpression {
         }
 
         List<String> resultList = new ArrayList<>();
+        // 记录数字开始的索引
         int startIndex = 0;
+        StringBuffer numStr = new StringBuffer();
 
         for (int i = 0; i < infixExpression.length(); i++) {
             char a = infixExpression.charAt(i);
-            // 进入if语句块时，i所在位置字符为操作符,即 a 为操作符
-            if (a == '+' || a == '-' || a == '*' || a == '/'
-                    || a == '(' || a == ')') {
-                // 裁剪数字
-                String numStr = infixExpression.substring(startIndex, i);
-                resultList.add(numStr);
-                String operatorStr = String.valueOf(a);
-                resultList.add(operatorStr);
-                startIndex = i + 1;
+            if (a <= '9' && a >= '0') {
+                numStr.append(a);
+            } else if (a == '+' || a == '-' || a == '*' || a == '/' || a == '(' || a == ')') {
+                if (numStr.length() != 0) {
+                    // 该操作符前有数字,将数字存起来
+                    resultList.add(String.valueOf(numStr));
+                    // 清空 StringBuffer 用来存放下一个数字
+                    numStr.delete(0, numStr.length());
+                }
+
+                resultList.add(String.valueOf(a));
             }
         }
 
-        // 裁剪最后一个数字
-        String numStr = infixExpression.substring(startIndex, infixExpression.length());
-        resultList.add(numStr);
+        // 最后一个数字
+        if (numStr.length() != 0) {
+            resultList.add(String.valueOf(numStr));
+            numStr.delete(0, numStr.length());
+            numStr = null;
+        }
 
         return resultList;
     }
@@ -86,8 +93,8 @@ public class Infix2PostExpression {
                 4. 为算术运算符
                  */
                 boolean loop = true;
-                while (true) {
-                    if (s1.isEmpty() || s1.peek().equals("(")) {
+                while (loop) {
+                    if (s1.isEmpty() || "(".equals(s1.peek())) {
                         // 4.1 s1 栈为空 or s1 栈顶为 ( ，直接入 s1 栈
                         s1.add(item);
                         loop = false;
@@ -100,11 +107,11 @@ public class Infix2PostExpression {
                         s2.add(s1.pop());
                     }
                 }
-            } else if (item.equals("(")) {
+            } else if ("(".equals(item)) {
                 // 5.1 左括号直接入 s1栈
                 s1.push(item);
-            } else if (item.equals(")")) {
-                while (s1.peek() != "(") {
+            } else if (")".equals(item)) {
+                while (!"(".equals(s1.peek()) ) {
                     s2.add(s1.pop());
                 }
                 s1.pop();

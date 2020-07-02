@@ -2,6 +2,7 @@ package stack.postfix;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.List;
 
 /**
  * 后缀表达式(逆波兰式)计算
@@ -37,9 +38,26 @@ public class PostfixExpressionCal {
             }
         }
 
-        int calResult = numStack.pop();
+        return numStack.pop();
+    }
 
-        return calResult;
+    public int calPostfixExpression(List<String> postfixList) {
+
+        if (postfixList == null || postfixList.size() == 0) {
+            throw new RuntimeException("postfixList is empty");
+        }
+
+        for (String item : postfixList) {
+            // 匹配字符串是否为多个数字组成
+            if (item.matches("\\d+")) {
+                Integer num = Integer.valueOf(item);
+                numStack.push(num);
+            } else {
+                cal(item);
+            }
+        }
+
+        return numStack.pop();
     }
 
     private void cal(String operator) {
