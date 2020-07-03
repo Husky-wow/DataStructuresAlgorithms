@@ -10,7 +10,7 @@ public class PostExpressionCalDemo {
         int result = calculator.calPostfixExpression(expression);
         System.out.println(expression + " = " + result);
 
-        String infixExpression = "(3+4)*4-6";
+        String infixExpression = "(31+450)*4-60";
 
         List<String> infixList = Infix2PostExpression.infixString2List(infixExpression);
         System.out.println("中缀表达式");
