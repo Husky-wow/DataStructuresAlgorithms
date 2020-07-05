@@ -17,6 +17,7 @@ public class MazeDemo {
 
     /**
      * 初始化一个迷宫地图
+     * @return
      */
     private static int[][] initMazeMap() {
         int[][] map = new int[8][7];
