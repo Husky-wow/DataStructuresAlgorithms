@@ -74,5 +74,84 @@ public class BinaryTree {
         }
     }
 
+    /**
+     * 从node节点开始，前序查找编号为no的节点
+     * @param node
+     * @param no
+     */
+    public TreeNode getByPreOrder(TreeNode node, int no) {
+
+        if (node != null) {
+            // 与当前节点做比较
+            if (node.no == no) {
+                return node;
+            }
+            // 向左遍历
+            TreeNode leftResult = getByPreOrder(node.leftChild, no);
+            if (leftResult != null) {
+                return leftResult;
+            }
+            // 向右遍历
+            return  getByPreOrder(node.rightChild, no);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * 从node节点开始，中序查找编号为no的节点
+     * @param node
+     * @param no
+     */
+    public TreeNode getByInOrder(TreeNode node, int no) {
+
+        if (node != null) {
+            // 向左遍历
+            TreeNode leftResult = getByInOrder(node.leftChild, no);
+            if (leftResult != null) {
+                return leftResult;
+            }
+            // 与当前节点做比较
+            if (node.no == no) {
+                return node;
+            }
+            // 向右遍历
+            return  getByInOrder(node.rightChild, no);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * 从node节点开始，后序查找编号为no的节点
+     * @param node
+     * @param no
+     */
+    public TreeNode getByPostOrder(TreeNode node, int no) {
+
+        if (node != null) {
+            // 向左遍历
+            TreeNode leftResult = getByPostOrder(node.leftChild, no);
+            if (leftResult != null) {
+                return leftResult;
+            }
+
+            //向右遍历
+            TreeNode rightResult = getByPostOrder(node.rightChild, no);
+            if (rightResult != null) {
+                return rightResult;
+            }
+
+            // 与当前节点做比较
+            if (node.no == no) {
+                return node;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
 
 }
