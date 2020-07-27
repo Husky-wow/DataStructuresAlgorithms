@@ -28,13 +28,13 @@ public class BinaryTreeDemo {
 
         // 从根节点开始遍历
         System.out.println("前序遍历");
-        binaryTree.preOrder(root);
+        binaryTree.preOrder();
 
         System.out.println("中序遍历");
-        binaryTree.inOrder(root);
+        binaryTree.inOrder();
 
         System.out.println("后序遍历");
-        binaryTree.postOrder(root);
+        binaryTree.postOrder();
 
 
         System.out.println("前序遍历查找~~~");

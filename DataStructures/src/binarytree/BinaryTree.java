@@ -18,6 +18,21 @@ public class BinaryTree {
     }
 
     /**
+     * 对外提供的方法
+     */
+    public void preOrder() {
+        preOrder(root);
+    }
+
+    public void inOrder() {
+        inOrder(root);
+    }
+
+    public void postOrder() {
+        postOrder(root);
+    }
+
+    /**
      * 前序遍历，递归，回溯
      *  1. 先输出当前节点
      *  2. 向左遍历
@@ -25,7 +40,7 @@ public class BinaryTree {
      * 结束条件：node == null
      * @param node
      */
-    public void preOrder(TreeNode node) {
+    private void preOrder(TreeNode node) {
         if (node != null) {
             // 输出当前节点
             System.out.println(node.toString());
@@ -44,7 +59,7 @@ public class BinaryTree {
      * 结束条件：node == null
      * @param node
      */
-    public void inOrder(TreeNode node) {
+    private void inOrder(TreeNode node) {
         if (node != null) {
             // 向左遍历
             inOrder(node.leftChild);
@@ -63,7 +78,7 @@ public class BinaryTree {
      * 结束条件：node == null
      * @param node
      */
-    public void postOrder(TreeNode node) {
+    private void postOrder(TreeNode node) {
         if (node != null) {
             // 向左遍历
             postOrder(node.leftChild);
