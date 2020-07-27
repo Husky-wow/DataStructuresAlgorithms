@@ -18,6 +18,18 @@ public class TreeNode {
      */
     public TreeNode rightChild;
 
+    /**
+     * 左标志，为了线索二叉树添加
+     *  为 0 时，leftChild指向左子节点
+     *  为 1 时，leftChild指向前驱节点
+     */
+    public int leftTag = 0;
+
+    /**
+     * 右标志，同左标志
+     */
+    public int rightTag = 0;
+
     public TreeNode(int no) {
         this.no = no;
     }
