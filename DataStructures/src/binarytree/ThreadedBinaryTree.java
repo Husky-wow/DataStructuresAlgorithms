@@ -2,6 +2,7 @@ package binarytree;
 
 /**
  * 线索二叉树
+ *  以中序线索化和遍历展开，推导出前序和后序
  * @author xuyifan
  */
 public class ThreadedBinaryTree {
@@ -31,6 +32,10 @@ public class ThreadedBinaryTree {
      */
     public void threadedTreeByInOrder() {
         threadedTreeByInOrder(root);
+    }
+
+    public void threadedTreeByPostOrder() {
+        threadedTreeByPostOrder(root);
     }
 
     /**
@@ -99,6 +104,68 @@ public class ThreadedBinaryTree {
     }
 
     /**
+     * 以后序遍历的方式线索化二叉树
+     * @param node
+     */
+    private void threadedTreeByPostOrder(TreeNode node) {
+        if (node != null) {
+            // 向左遍历
+            threadedTreeByPostOrder(node.leftChild);
+
+            // 向右遍历
+            threadedTreeByPostOrder(node.rightChild);
+
+            /*
+            线索化点前节点
+             */
+            if (node.leftChild == null) {
+                node.leftChild = preNode;
+                node.leftTag = 1;
+            }
+
+            if (preNode != null && preNode.rightChild == null) {
+                preNode.rightChild = node;
+                preNode.rightTag = 1;
+            }
+
+            preNode = node;
+        }
+    }
+
+    /**
+     * 遍历前序序线索化的二叉树
+     */
+    public void listPreOrder() {
+        // 辅助指针，从根节点开始遍历
+        TreeNode current = root;
+
+        /*
+        前序遍历
+            输出节点
+            找左子节点
+            找右子节点
+         */
+        while (current != null) {
+            System.out.println(current);
+
+            // 如果当前节点的左指针为左子节点，继续向左寻找
+            if (current.leftTag == 0) {
+                current = current.leftChild;
+                continue;
+            }
+
+            // 寻找该节点的后继节点，==1时找到后继节点，直接输出
+            while (current.rightTag == 1) {
+                current = current.rightChild;
+                System.out.println(current);
+            }
+
+            // 如果当前节点的右指针为右子节点，继续向右寻找
+            current = current.rightChild;
+        }
+    }
+
+    /**
      * 遍历中序线索化的二叉树
      *  如果看不懂，debug一下，在结合正常二叉树的中序遍历，可以找到一些思路
      */
@@ -132,36 +199,36 @@ public class ThreadedBinaryTree {
         }
     }
 
-    /**
-     * 遍历前序序线索化的二叉树
-     */
-    public void listPreOrder() {
-        // 辅助指针，从根节点开始遍历
+    public void listPostOrder() {
         TreeNode current = root;
 
         /*
-        中序遍历
-            输出节点
+        后序遍历
             找左子节点
             找右子节点
+            输出节点
          */
         while (current != null) {
-            System.out.println(current);
 
-            // 如果当前节点的左指针为左子节点，继续向左寻找
-            if (current.leftTag == 0) {
+            while (current.leftTag == 0) {
                 current = current.leftChild;
-                continue;
             }
 
-            // 寻找该节点的后继节点，==1时找到后继节点，直接输出
             while (current.rightTag == 1) {
-                current = current.rightChild;
                 System.out.println(current);
+                current = current.rightChild;
             }
 
-            // 如果当前节点的右指针为右子节点，继续向右寻找
+            // TODO 后序遍历存在问题，貌似应该需要个变量记录当前变量的前驱节点？？？？
+            System.out.println(current);
             current = current.rightChild;
         }
+
+
+
+
+
     }
+
+
 }
