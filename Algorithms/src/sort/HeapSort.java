@@ -1,5 +1,7 @@
 package sort;
 
+import java.util.Arrays;
+
 /**
  * @author admin
  * @ClassName HeapSort.java
@@ -9,7 +11,9 @@ package sort;
 public class HeapSort {
 
     public static void main(String[] args) {
-
+        int[] array = {50, 10, 90, 30, 70, 40, 80, 60, 20};
+        heapSort(array);
+        System.out.println(Arrays.toString(array));
     }
 
     /**
@@ -30,15 +34,16 @@ public class HeapSort {
             1. 为什么i从 (array.length - 1) - 1开始？
                数组中最后一个索引存放的肯定是一个叶子节点，该节点的父节点肯定是最后一个非叶子节点，所以此节点开始！！
          */
-        for (int i = (array.length - 1 - 1) / 2 ; i >= 0; i-- ) {
-            heapAdjust(array, i, array.length);
+        int lastIndex = array.length - 1;
+        for (int i = (lastIndex - 1) / 2 ; i >= 0; i-- ) {
+            heapAdjust(array, i, lastIndex);
         }
 
         /*
         1. 得到一个大顶堆后，此时根节点值最大，将根节点放置在数组最后
         2. 重新调整结构，使其满足堆定义，然后继续交换堆顶元素与当前末尾元素，反复执行调整+交换步骤，直到整个序列有序
          */
-        for (int i = array.length - 1; i > 0; i--) {
+        for (int i = lastIndex; i > 0; i--) {
             /*
             交换第一个元素和最后一个元素
              */
