@@ -4,12 +4,22 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
 
     public int value;
 
+    /**
+     * 用于记录Huffman编码的符号
+     */
+    public Character code;
+
     public HuffmanNode leftChild;
 
     public HuffmanNode rightChild;
 
     public HuffmanNode(int value) {
         this.value = value;
+    }
+
+    public HuffmanNode(int value, char code) {
+        this.value = value;
+        this.code = code;
     }
 
     @Override
@@ -22,6 +32,7 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
     public String toString() {
         return "HuffmanNode{" +
                 "value=" + value +
+                ", code=" + code +
                 '}';
     }
 }
