@@ -125,6 +125,8 @@ public class HuffmanCoding {
                 // 防止越界
                 byteCode = (byte) Integer.parseInt(codeStringBuilder.substring(i), 2);
             } else {
+                // 注：这里使用Integer.parseInt生成int 然后强转byte是为了使8位二进制为带符号二进制
+                // 虽然Byte.parseByte底层使用Integer.parseInt，但是Integer.parseInt转化时是不带符号的，Byte.parseByte内部有一个判断，因此会有错误
                 byteCode = (byte) Integer.parseInt(codeStringBuilder.substring(i, i + 8), 2);
             }
 
