@@ -13,18 +13,18 @@ public class HuffmanCoding {
     /**
      * Huffman 编码表
      */
-    private Map<Character, String> huffmanCodeTable = new HashMap<>();
+    private Map<Byte, String> huffmanCodeTable = new HashMap<>();
 
     /**
      * 统计字符串中每个字符出现的个数
-     * @param str
+     * @param oriData
      * @return
      */
-    private Map<Character, Integer> countChar(String str) {
-        Map<Character, Integer> resultMap = new HashMap<>();
+    private Map<Byte, Integer> countChar(byte[] oriData) {
+        Map<Byte, Integer> resultMap = new HashMap<>();
         // 遍历str中的每一个字符，并统计字符出现的个数
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
+        for (int i = 0; i < oriData.length; i++) {
+            byte c = oriData[i];
             if (resultMap.containsKey(c)) {
                 int count = resultMap.get(c);
                 count++;
@@ -39,17 +39,17 @@ public class HuffmanCoding {
 
     /**
      * 将统计结果转换为Huffman节点
-     * @param charMap
+     * @param byteMap
      * @return
      */
-    private List<HuffmanNode> covertHuffmanNode(Map<Character, Integer> charMap) {
+    private List<HuffmanNode> covertHuffmanNode(Map<Byte, Integer> byteMap) {
         List<HuffmanNode> resultList = new ArrayList<>();
 
-        Set<Map.Entry<Character, Integer>> entrySet = charMap.entrySet();
-        Iterator<Map.Entry<Character, Integer>> iterator = entrySet.iterator();
+        Set<Map.Entry<Byte, Integer>> entrySet = byteMap.entrySet();
+        Iterator<Map.Entry<Byte, Integer>> iterator = entrySet.iterator();
         while (iterator.hasNext()) {
-            Map.Entry<Character, Integer> entry = iterator.next();
-            char code = entry.getKey();
+            Map.Entry<Byte, Integer> entry = iterator.next();
+            byte code = entry.getKey();
             int value = entry.getValue();
             HuffmanNode node = new HuffmanNode(value, code);
             resultList.add(node);
@@ -94,13 +94,13 @@ public class HuffmanCoding {
     }
 
     /**
-     * 生成Huffman 编码
-     * @param str
+     * 重载方法，根据byte[]生成
+     * @param oriData
      * @return
      */
-    public byte[] huffmanCoding(String str) {
+    public byte[] huffmanCoding(byte[] oriData) {
         // 1. 统计字符串中字符出现个数
-        Map<Character, Integer> countMap = countChar(str);
+        Map<Byte, Integer> countMap = countChar(oriData);
         // 2. 根据统计结果生成Huffman节点
         List<HuffmanNode> nodeList = covertHuffmanNode(countMap);
         // 3. 生成Huffman编码表
@@ -108,8 +108,8 @@ public class HuffmanCoding {
 
         StringBuilder codeStringBuilder = new StringBuilder();
         // 4. 根据Huffman编码表将字符串转换成Huffman编码
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
+        for (int i = 0; i < oriData.length; i++) {
+            byte c = oriData[i];
             codeStringBuilder.append(huffmanCodeTable.get(c));
         }
 

@@ -7,7 +7,7 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
     /**
      * 用于记录Huffman编码的符号
      */
-    public Character code;
+    public Byte code;
 
     public HuffmanNode leftChild;
 
@@ -17,7 +17,7 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
         this.value = value;
     }
 
-    public HuffmanNode(int value, char code) {
+    public HuffmanNode(int value, byte code) {
         this.value = value;
         this.code = code;
     }
