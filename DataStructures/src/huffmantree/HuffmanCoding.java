@@ -137,5 +137,31 @@ public class HuffmanCoding {
         return huffmanCodeBytes;
     }
 
+    /**
+     * 将十进制的byte编码转换成二进制的字符串（补码）
+     * @param flag 是否需要补位至8位
+     * @param code 编码后的十进制byte
+     * @return 返回二进制字符串（补码）
+     */
+    public String byte2BinaryString(boolean flag, byte code) {
+        // 要使用Integer.toBinaryString()方法将int转换成二进制字符串，所以需要先将byte强转为int
+        int temp = code;
+        // Integer.toBinaryString()如果输入一个负数，那将32位的补码
+        // 如果输入的是正数，返回的可能是一个不足32位的字符串
+        // (在当前的情况下输入的是byte,返回的字符串可能不足8位)，因此需要补位
+        // 要将不足8位的二进制字符串不足8位，因此这里与256（1 0000 0000）位或
+        if (flag) {
+            temp |= 256;
+        }
+        // 计算temp对应的二进制补码，此时返回的字符串必然>8，因为前边与256位或
+        String result = Integer.toBinaryString(temp);
+        // 截取最后8位字符串
+        if (flag) {
+            return result.substring(result.length() - 8);
+        } else {
+            return result;
+        }
+    }
+
 
 }

@@ -1,8 +1,5 @@
 package huffmantree;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  * @author admin
  * @ClassName HuffmanCodingDemo.java
@@ -12,9 +9,11 @@ import java.util.Map;
 public class HuffmanCodingDemo {
     public static void main(String[] args) {
         HuffmanCoding huffmanCoding = new HuffmanCoding();
-        String str = "i like like like java do you like a java";
+        /*String str = "i like like like java do you like a java";
         byte[] data = str.getBytes();
-        huffmanCoding.huffmanCoding(data);
+        huffmanCoding.huffmanCoding(data);*/
+
+        huffmanCoding.byte2BinaryString(true, (byte) 1);
 
 
     }
