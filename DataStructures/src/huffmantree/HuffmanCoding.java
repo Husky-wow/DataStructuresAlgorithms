@@ -94,9 +94,9 @@ public class HuffmanCoding {
     }
 
     /**
-     * 重载方法，根据byte[]生成
-     * @param oriData
-     * @return
+     * Huffman 编码
+     * @param oriData 需要编码的数据
+     * @return 返回编码后的字节数组（编码后的字节数组长度会减小）
      */
     public byte[] huffmanCoding(byte[] oriData) {
         // 1. 统计字符串中字符出现个数
@@ -143,7 +143,7 @@ public class HuffmanCoding {
      * @param code 编码后的十进制byte
      * @return 返回二进制字符串（补码）
      */
-    public String byte2BinaryString(boolean flag, byte code) {
+    private String byte2BinaryString(boolean flag, byte code) {
         // 要使用Integer.toBinaryString()方法将int转换成二进制字符串，所以需要先将byte强转为int
         int temp = code;
         // Integer.toBinaryString()如果输入一个负数，那将32位的补码
@@ -163,5 +163,13 @@ public class HuffmanCoding {
         }
     }
 
+    /**
+     * 将Huffman编码字节数组解码
+     * @param huffmanCodeBytes 编码后的字节数组
+     * @return 解码后的字节数组（解码后字节数组长度 > 编码后的字节数组长度）
+     */
+    public byte[] huffmanDecoding(byte[] huffmanCodeBytes) {
 
+        return null;
+    }
 }

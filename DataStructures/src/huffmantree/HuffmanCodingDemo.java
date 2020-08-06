@@ -13,7 +13,7 @@ public class HuffmanCodingDemo {
         byte[] data = str.getBytes();
         huffmanCoding.huffmanCoding(data);*/
 
-        huffmanCoding.byte2BinaryString(true, (byte) 1);
+        //huffmanCoding.byte2BinaryString(true, (byte) 1);
 
 
     }
