@@ -1,5 +1,7 @@
 package huffmantree;
 
+import java.util.Arrays;
+
 /**
  * @author admin
  * @ClassName HuffmanCodingDemo.java
@@ -9,11 +11,20 @@ package huffmantree;
 public class HuffmanCodingDemo {
     public static void main(String[] args) {
         HuffmanCoding huffmanCoding = new HuffmanCoding();
-        /*String str = "i like like like java do you like a java";
+        String str = "i like like like java do you like a java";
         byte[] data = str.getBytes();
-        huffmanCoding.huffmanCoding(data);*/
+        System.out.println("原始数据~~~");
+        System.out.println(Arrays.toString(data));
 
-        //huffmanCoding.byte2BinaryString(true, (byte) 1);
+        // 编码
+        byte[] coding = huffmanCoding.huffmanCoding(data);
+
+        // 解码
+        byte[] decoding = huffmanCoding.huffmanDecoding(coding);
+
+        // 解码后
+        System.out.println("解码后");
+        System.out.println(Arrays.toString(decoding));
 
 
     }

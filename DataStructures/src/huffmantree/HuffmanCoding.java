@@ -16,6 +16,12 @@ public class HuffmanCoding {
     private Map<Byte, String> huffmanCodeTable = new HashMap<>();
 
     /**
+     * Huffman 解码表
+     */
+    private Map<String, Byte> huffmanDecodeTable = new HashMap<>();
+
+
+    /**
      * 统计字符串中每个字符出现的个数
      * @param oriData
      * @return
@@ -113,6 +119,9 @@ public class HuffmanCoding {
             codeStringBuilder.append(huffmanCodeTable.get(c));
         }
 
+        /*System.out.println("编码字符串");
+        System.out.println(codeStringBuilder.toString());*/
+
         // 5. 将编码字符串转换为字节数组
 
         // 字节数组长度(8位为一个字节)
@@ -133,7 +142,6 @@ public class HuffmanCoding {
             huffmanCodeBytes[byteIndex++] = byteCode;
         }
 
-        System.out.println(Arrays.toString(huffmanCodeBytes));
         return huffmanCodeBytes;
     }
 
@@ -169,7 +177,43 @@ public class HuffmanCoding {
      * @return 解码后的字节数组（解码后字节数组长度 > 编码后的字节数组长度）
      */
     public byte[] huffmanDecoding(byte[] huffmanCodeBytes) {
+        // 1. 将HuffmanCodeTable key和value转换，生成解码表，方便解码
+        // 这样做的不会出错的原因是好，Huffman的编码值后的值是唯一的
+        Set<Map.Entry<Byte, String>> entrySet = huffmanCodeTable.entrySet();
+        Iterator<Map.Entry<Byte, String>> iterator = entrySet.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Byte, String> entry = iterator.next();
+            huffmanDecodeTable.put(entry.getValue(), entry.getKey());
+        }
 
-        return null;
+        // 2. 循环编码后的字节数组，取出每个字节，然后从解码表中找到对应的二进制字符串，将这些字符串拼接起来
+        StringBuilder binaryStr = new StringBuilder();
+        for (int i = 0; i < huffmanCodeBytes.length; i++) {
+            // 最后一个编码不用补位，因为在编码阶段编码的二进制位数不足8位
+            boolean flag = !(i == huffmanCodeBytes.length - 1);
+            binaryStr.append(byte2BinaryString(flag, huffmanCodeBytes[i]));
+        }
+
+//        System.out.println(binaryStr.toString());
+
+        // 3. 依次扫描字符串中每个字符与解码表匹配
+        int start = 0;
+        List<Byte> resultList = new ArrayList<>();
+        // 因为subString是包左不包又，因此此处i <= binaryStr.length()
+        for (int i = 0; i <= binaryStr.length(); i++) {
+            String codeStr = binaryStr.substring(start, i);
+            if (huffmanDecodeTable.containsKey(codeStr)) {
+                resultList.add(huffmanDecodeTable.get(codeStr));
+                start = i;
+            }
+        }
+
+        // 4. List 转 byte[]
+        byte[] resultByte = new byte[resultList.size()];
+        for (int i = 0; i < resultByte.length; i++) {
+            resultByte[i] = resultList.get(i);
+        }
+
+        return resultByte;
     }
 }
