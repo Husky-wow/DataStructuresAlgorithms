@@ -3,14 +3,14 @@ package balancebinarytree;
 /**
  * 平衡二叉树节点
  */
-public class AVLNode {
+public class AVLTreeNode {
     public int value;
 
-    public AVLNode leftChild;
+    public AVLTreeNode leftChild;
 
-    public AVLNode rightChild;
+    public AVLTreeNode rightChild;
 
-    public AVLNode(int value) {
+    public AVLTreeNode(int value) {
         this.value = value;
     }
 

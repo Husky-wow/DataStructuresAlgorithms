@@ -5,7 +5,7 @@ public class AVLTreeDemo {
         int[] array = {7, 3, 10, 12, 5, 1, 9, 4, 13, 14};
         AVLTree avlTree = new AVLTree();
         for (int i = 0; i < array.length; i++) {
-            AVLNode node = new AVLNode(array[i]);
+            AVLTreeNode node = new AVLTreeNode(array[i]);
             avlTree.insert(node);
         }
 
