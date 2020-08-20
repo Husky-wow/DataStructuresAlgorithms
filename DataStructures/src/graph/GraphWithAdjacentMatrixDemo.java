@@ -28,6 +28,6 @@ public class GraphWithAdjacentMatrixDemo {
 
         // 深度优先遍历
         System.out.println("深度优先遍历图");
-        graph.dft();
+        graph.dfs();
     }
 }

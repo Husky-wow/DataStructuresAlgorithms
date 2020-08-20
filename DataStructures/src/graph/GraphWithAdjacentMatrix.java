@@ -102,10 +102,10 @@ public class GraphWithAdjacentMatrix {
     }
 
     /**
-     * 深度优先遍历
+     * 深度优先遍历depth-first search
      * @param vertexIndex 正在被遍历的顶点的索引值
      */
-    private void dft(int vertexIndex) {
+    private void dfs(int vertexIndex) {
         // 先输出该顶点
         System.out.print(getVertexStrByIndex(vertexIndex) + " ->");
         // 1. 将该顶点置位以访问
@@ -116,7 +116,7 @@ public class GraphWithAdjacentMatrix {
             // 3. firstAV != -1 表示找到第一个邻接顶点，判断该顶点是否被访问过
             if (!vertexIsVisited[adjacentVertex]) {
                 // 4. 如果没有被访问过，则继续深度遍历索引值为firstAV的顶点
-                dft(adjacentVertex);
+                dfs(adjacentVertex);
             }
             // 5. 如果被访问过，就继续找vertexIndex的下一个邻接顶点
             adjacentVertex = getNextAdjacentVertex(vertexIndex, adjacentVertex);
@@ -131,11 +131,11 @@ public class GraphWithAdjacentMatrix {
      *  1. 为了更好的使用递归
      *  2. 为了避免上述的不连通图无法完全遍历的问题
      */
-    public void dft() {
+    public void dfs() {
         for (int i = 0; i < vertexList.size(); i++) {
             if (!vertexIsVisited[i]) {
                 // 如果该节点没有被访问过，则遍历该节点
-                dft(i);
+                dfs(i);
             }
         }
     }
