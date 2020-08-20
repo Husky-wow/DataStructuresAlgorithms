@@ -25,5 +25,9 @@ public class GraphWithAdjacentMatrixDemo {
         graph.addEdges(1, 4, 1);
 
         graph.showGraph();
+
+        // 深度优先遍历
+        System.out.println("深度优先遍历图");
+        graph.dft();
     }
 }
