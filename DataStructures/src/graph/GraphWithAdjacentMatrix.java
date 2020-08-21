@@ -1,6 +1,7 @@
 package graph;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -34,7 +35,6 @@ public class GraphWithAdjacentMatrix {
      */
     public GraphWithAdjacentMatrix(int count) {
         edges = new int[count][count];
-        vertexIsVisited = new boolean[count];
     }
 
     /**
@@ -107,7 +107,7 @@ public class GraphWithAdjacentMatrix {
      */
     private void dfs(int vertexIndex) {
         // 先输出该顶点
-        System.out.print(getVertexStrByIndex(vertexIndex) + " ->");
+        System.out.print(getVertexStrByIndex(vertexIndex) + " -> ");
         // 1. 将该顶点置位以访问
         vertexIsVisited[vertexIndex] = true;
         // 2. 找到该顶点的第一个邻接顶点的索引值
@@ -132,10 +132,65 @@ public class GraphWithAdjacentMatrix {
      *  2. 为了避免上述的不连通图无法完全遍历的问题
      */
     public void dfs() {
+        vertexIsVisited = new boolean[vertexList.size()];
         for (int i = 0; i < vertexList.size(); i++) {
             if (!vertexIsVisited[i]) {
                 // 如果该节点没有被访问过，则遍历该节点
                 dfs(i);
+            }
+        }
+    }
+
+    /**
+     * 广度优先搜索 breadth-first search
+     * @param vertexIndex 从vertexIndex顶点开始遍历
+     */
+    private void bfs(int vertexIndex) {
+        // 输出该顶点
+        System.out.print(getVertexStrByIndex(vertexIndex) + " -> ");
+        // 将该顶点的状态置为已经访问
+        vertexIsVisited[vertexIndex] = true;
+        // 用LinkedList模拟队列，队列中存放的顶点都是已经被访问过的顶点
+        LinkedList<Integer> linked = new LinkedList<>();
+        // 使用队列存放本次遍历中已经访问过的顶点
+        linked.addLast(vertexIndex);
+        /*
+        队列不为空就一直可以遍历
+         */
+        while (!linked.isEmpty()) {
+            // 1. 取出队头的顶点, u表示其索引
+            int u = linked.removeFirst();
+            // 2. 找出该顶点的第一个邻接顶点
+            int v = getFirstAdjacentVertex(u);
+            // v != -1 表示找到 u 顶点的第一个邻接顶点
+            while (v != -1) {
+                // 如果该顶点没有被访问过
+                if (!vertexIsVisited[v]) {
+                    // 3.1 打印该顶点
+                    System.out.print(getVertexStrByIndex(v) + " -> ");
+                    // 3.2 设置该顶点的状态为已访问
+                    vertexIsVisited[v] = true;
+                    // 3.3 把 v 顶点入队列
+                    linked.addLast(v);
+                }
+                // 4 v顶点已经被访问过，或者3步骤中访问完成v顶点继续找 u 顶点的下一个邻接顶点
+                v = getNextAdjacentVertex(u, v);
+                // 当找不到u的下一个邻接顶点就会跳出内存while循环
+            }
+            // 当跳出内层循环后会去判断队列是否为空，对列不为空就取出对头顶点，继续遍历
+            // 如果在dfs中所描述那样，会存在不连通图的情况，如果仅有这一个方法，无法遍历不连通的节点
+            // 因此外部还需要一个方法
+        }
+    }
+
+    /**
+     * 对外提供的breadth-first search方法
+     */
+    public void bfs() {
+        vertexIsVisited = new boolean[vertexList.size()];
+        for (int i = 0; i < vertexList.size(); i++) {
+            if (!vertexIsVisited[i]) {
+                bfs(i);
             }
         }
     }
