@@ -1,4 +1,4 @@
-package search;
+package interpolationsearch;
 
 /**
  * @author admin

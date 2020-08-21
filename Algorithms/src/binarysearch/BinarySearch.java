@@ -1,4 +1,4 @@
-package search;
+package binarysearch;
 
 import java.util.ArrayList;
 
@@ -8,20 +8,31 @@ import java.util.ArrayList;
  *    本例中采用升序排列
  */
 public class BinarySearch {
-    public static void main(String[] args) {
-        /*int[] arr = {1, 3, 10, 50, 70, 100};
-        int resultIndex = binarySearch(arr, 5, 0, arr.length - 1);
-        System.out.println(resultIndex);*/
 
-        int[] arr2 = {1, 3, 3, 3, 10, 50, 70, 100};;
-        ArrayList<Integer> resultList = binarySearch2(arr2, 3, 0, arr2.length - 1);
-        if (resultList != null) {
-            for (Integer i: resultList) {
-                System.out.println(i);
+    /**
+     * 二分查找的非递归实现
+     * @param array 原始数组
+     * @param targetValue 查找目标值
+     * @return 返回目标值在原始数组中的索引位置，如果没有找到则返回-1
+     */
+    public int binarySearch(int[] array, int targetValue) {
+        int left = 0;
+        int right = array.length - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (array[mid] == targetValue) {
+                return mid;
+            } else if (array[mid] < targetValue) {
+                // 向右搜寻
+                left = mid + 1;
+            } else if (array[mid] > targetValue) {
+                // 想左搜寻
+                right = mid - 1;
             }
-        } else {
-            System.out.println("没找到");
         }
+
+        // 运行到这里表示没有找到哦啊
+        return -1;
     }
 
     /**
@@ -32,7 +43,7 @@ public class BinarySearch {
      * @param right
      * @return 没有找到返回 -1
      */
-    private static int binarySearch(int[] array, int targetValue, int left, int right) {
+    public int binarySearch(int[] array, int targetValue, int left, int right) {
         /*
         递归结束条件
          */
@@ -62,7 +73,7 @@ public class BinarySearch {
      * @param right
      * @return
      */
-    private static ArrayList<Integer> binarySearch2(int[] array, int targetValue, int left, int right) {
+    public ArrayList<Integer> binarySearch2(int[] array, int targetValue, int left, int right) {
         /*
         递归结束条件
          */
