@@ -51,16 +51,18 @@ public class Graph {
         for (int k = 1; k < vertex; k++) {
             /*
             下边的两个循环的目的：
-                1. 找到已经被访问的节点（visited[i]==1）；
+                1. 找到已经被访问的所有节点（visited[i]==1）；
                 2. 找到和已经被访问的节点能够连通的没有被访问的节点（visited[j]==0）中路径权值最小的节点（weight[i][j] < minWeight）
                 注：当weight[i][j]<10000表示该两个节点之间能被连通，第一次找到符合的值将其赋给minWeight，后边找到更小的，覆盖
              */
             for (int i = 0; i < vertex; i++) {
-                for (int j = 0; j < vertex; j++) {
-                    if (visited[i]==1 && visited[j] == 0 && weight[i][j] < minWeight) {
-                        minWeight = weight[i][j];
-                        v1 = i;
-                        v2 = j;
+                if (visited[i] == 1) {
+                    for (int j = 0; j < vertex; j++) {
+                        if (visited[j] == 0 && weight[i][j] < minWeight) {
+                            minWeight = weight[i][j];
+                            v1 = i;
+                            v2 = j;
+                        }
                     }
                 }
             }
@@ -73,6 +75,7 @@ public class Graph {
             visited[v2] = 1;
             System.out.println("边<" + data[v1] + "," + data[v2] + "> 权值:" + minWeight);
             minWeight = 10000;
+            System.out.println("~~~~~~~~~~~");
         }
     }
 
