@@ -1,4 +1,4 @@
-package threadlcoal;
+package thread;
 
 import org.apache.commons.io.FileUtils;
 
