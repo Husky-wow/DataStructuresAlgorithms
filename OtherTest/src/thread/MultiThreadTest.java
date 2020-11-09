@@ -25,10 +25,14 @@ public class MultiThreadTest {
 }
 
 class CustomLock {
-    private int count = 3;
+    private int count = 1;
 
     public int getCount() {
         return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public void addCount() {
@@ -46,21 +50,22 @@ class RunnerTaskA implements Runnable {
 
     @Override
     public void run() {
-        synchronized (lock) {
-                for (int j = 0;  j < 2; j++) {
-                    if (lock.getCount() % 3 == 0) {
-                        lock.addCount();
-                        for (int i = 0; i < 2; i++) {
-                            System.out.println("A");
-                        }
-                    }
-                    lock.notify();
+        while (true) {
+            synchronized (lock) {
+                while (lock.getCount() != 1 && lock.getCount() != 6) {
                     try {
+                        lock.notifyAll();
                         lock.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
+                System.out.println("A");
+                lock.addCount();
+                if (lock.getCount() == 7) {
+                    lock.setCount(1);
+                }
+            }
         }
     }
 }
@@ -75,17 +80,18 @@ class RunnerTaskB implements Runnable {
 
     @Override
     public void run() {
-        synchronized (lock) {
-            for (int j = 0; j < 2; j++) {
-                for (int i = 0; i < 2; i++) {
-                    System.out.println("B");
+        while (true) {
+            synchronized (lock) {
+                while (lock.getCount() != 2 && lock.getCount() != 5) {
+                    try {
+                        lock.notifyAll();
+                        lock.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-                lock.notify();
-                try {
-                    lock.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                System.out.println("B");
+                lock.addCount();
             }
         }
     }
@@ -101,17 +107,18 @@ class RunnerTaskC implements Runnable {
 
     @Override
     public void run() {
-        synchronized (lock) {
-            for (int j = 0; j < 2; j++){
-                for (int i = 0; i < 2; i++) {
-                    System.out.println("C");
+        while (true) {
+            synchronized (lock) {
+                while (lock.getCount() != 3 && lock.getCount() != 4) {
+                    try {
+                        lock.notifyAll();
+                        lock.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-                lock.notify();
-                try {
-                    lock.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                System.out.println("C");
+                lock.addCount();
             }
         }
     }
